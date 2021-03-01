@@ -1,2 +1,2 @@
-# webpack-guides
+# webpack-demo
 https://webpack.js.org/guides/
