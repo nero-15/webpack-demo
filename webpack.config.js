@@ -22,4 +22,9 @@ module.exports = {
 		clean: true,
 		publicPath: '/',
 	},
+	optimization: {
+		splitChunks: {
+			chunks: 'all',
+		},
+	},
 };
