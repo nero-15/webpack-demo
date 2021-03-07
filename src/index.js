@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import printMe from './print.js';
 
 if (process.env.NODE_ENV !== 'production') {
 	console.log('Looks like we are in development mode!');
@@ -8,13 +7,22 @@ if (process.env.NODE_ENV !== 'production') {
 function component() {
 	const element = document.createElement('div');
 	const btn = document.createElement('button');
+	const br = document.createElement('br');
 
 	element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
 	btn.innerHTML = 'Click me and check the console!';
-	btn.onclick = printMe;
 
+	element.appendChild(br);
 	element.appendChild(btn);
+
+	// Note that because a network request is involved, some indication
+	// of loading would need to be shown in a production-level site/app.
+	btn.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
+		const print = module.default;
+
+		print();
+	});
 
 	return element;
 }
